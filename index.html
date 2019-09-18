@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sally Resume React</title>
+</head>
+<body>
+    <div id="app"></div>
+
+    <script
+        src="https://unpkg.com/react@16/umd/react.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/react-dom@16/umd/react-dom.development.js">
+    </script>
+    <script
+        src="https://unpkg.com/babel-standalone@6/babel.min.js">
+    </script>
+    <script type="text/babel">
+        function ResumeHeader(props) {
+        console.log(props)
+            return (
+                <header style={divStyle}>
+
+                {props.name}'s Resume
+                
+                    </header>
+            );
+        }
+
+        const divStyle = {textAlign:"center", backgroundColor:'bisque'};
+        const imgStyle = {textAlign:"center", marginBottom:'2px', border: '5px solid black'};
+        const listItemStyle = {textAlign:"center", backgroundColor:'bisque', listStyle:'none'};
+
+        function Address(props) {
+        console.log(props)
+            return (
+                <div style={divStyle}>
+                <h1>{props.name}'s Contact Information</h1>
+                    <img src={props.src} style={imgStyle} />
+                    <h2>Contact Me</h2>
+                    <address>
+                        <p>Address: {props.address} </p>
+                        <p>Phone: {props.phone} </p>
+                        <p>Email: {props.email} </p>
+                    </address>
+                </div>
+            );
+        }
+        function ContactInfo() {
+       
+            return (
+                <section className="contact-me">
+                    <Address src="https://static1.squarespace.com/static/50a02efce4b046b42952af27/t/5467f571e4b0a81ae8b4447f/1416099185470/SallyField.jpg"
+                    address="95 Sycamore Street
+Mays Landing, NJ 08330"
+                    phone="555-867-5309"
+                    email="sallystudent@example.edu"
+                    name="Sally"
+                    />
+                </section>
+            );
+        }
+        function JobEdu(props) {       // one job in JobList 
+            const jobDetails = [
+                {detail1: 'Assisted teachers in lesson plans & eventually led in planning lessons.' },
+                {detail2: 'Proctored exams' },
+                {detail3: 'Organized study guides for students' }
+            ];
+            return (
+                <li style={listItemStyle}>
+                    <h3 className="job">{props.company}</h3>
+                    <h4 className="job-title">{props.job}</h4>
+                    <ul style={listItemStyle}>
+                        <li>{jobDetails[0].detail1}</li>
+                        <li>{jobDetails[1].detail2}</li>
+                        <li>{jobDetails[2].detail3}</li>
+                    </ul>
+                </li>
+            );
+        }
+        
+        function JobsList() {
+            return (
+                <section className="employment-history" style={divStyle}>
+                    <h2>Employment History</h2>
+                    <ul style={listItemStyle}>
+                        <JobEdu company="New York City Department of Education"
+                        job="High School English Teacher & Paraprofessional educator" />
+                        
+                  </ul>
+                </section>
+            );
+        }
+        function Education(props) {
+            return (
+                <li style={listItemStyle}>
+                    <h3 className="school">{props.school}</h3>
+                    <p>{props.dates}</p>
+                    <p>{props.degree}</p>
+                </li>
+            );
+        }
+        function EducationList() {
+            return (
+                <section className="education" style={divStyle}>
+                    <h2>Education</h2>
+                    <ul style={listItemStyle}>
+                        <Education school="Dartmouth College"
+                         dates="(2005-2009)"
+                         degree="Bachelors of Art in English Literature" />
+                        
+                    </ul>
+                </section>
+            );
+        }
+        function App(props) {
+            console.log(props);
+            const studentName = "Sally Student";
+            return (
+                <div>
+                    <ResumeHeader name="Sally Student" />
+                    <main role="main" className={props.className}>
+                        {props.children}
+                    </main>
+                </div>
+            );
+        }
+        ReactDOM.render(
+        // Add a className to the App
+        <App className='resume'>
+                <ContactInfo />
+                <JobsList />
+                <EducationList />
+        </App>,
+        document.querySelector('#app')
+        );
+    </script>
+</body>
+</html>
